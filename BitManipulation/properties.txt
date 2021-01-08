@@ -1,0 +1,5 @@
+XOR:
+1. A^A=0
+2. A^0=A
+3. Differences of numbers in ranges of powers of 2 like [4-7) have there xors
+with difference of the numbers like 5^7=2=7-5.
