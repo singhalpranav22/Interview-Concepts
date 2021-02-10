@@ -46,6 +46,31 @@
 // Check for (gr & at(from last of string 2)) && (eat & rge(first from string 1)) are scramble strings or not
 // Check if any of them comes true, than function returns true
 // Do this recursively for finding the result
+// shorter version of the code
+int Solution::isScramble(const string A, const string B) {
+if(A.length()!=B.length())
+return 0;
+int n=A.length();
+if(n==0)
+return 1;
+if(A==B)
+return 1;
+string copy_A=A,copy_B=B;
+sort(copy_A.begin(),copy_A.end());
+sort(copy_B.begin(),copy_B.end());
+if(copy_A!=copy_B)
+return 0;
+for(int i=1;i<n;i++)
+{
+if(isScramble(A.substr(0,i),B.substr(0,i))&&isScramble(A.substr(i,n-i),B.substr(i,n-i)))
+return 1;
+if(isScramble(A.substr(0,i),B.substr(n-i,i))&&isScramble(A.substr(i,n-i),B.substr(0,n-i)))
+return 1;
+}
+return 0;
+
+}
+// longer version of the code
  class Solution {
 public:
      bool sameChar(string S1,string S2) // function to check if the two strings have same frequencies of character
