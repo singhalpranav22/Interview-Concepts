@@ -22,7 +22,7 @@
 
 // 1 <= nums.length <= 3 * 104
 // 0 <= nums[i] <= 105
-
+// DP solution : 
 class Solution {
 public:
     bool dp[100007];
@@ -52,3 +52,17 @@ int vis[100007];
     return solve(0,A.size()-1,A);
     }
 };
+
+// Greedy Solution:
+
+HariAcidReign123
+int Solution::canJump(vector<int> &A) {
+    // start from last index and see if you can reach the first
+    int N = A.size()-1;
+    int lastGoodidx = N;
+    for(int i = N-1; i>=0; i--){
+        if(i + A[i] >= lastGoodidx) lastGoodidx = i;
+    }
+    
+    return lastGoodidx == 0; // see if we reached idx 0. 
+}
