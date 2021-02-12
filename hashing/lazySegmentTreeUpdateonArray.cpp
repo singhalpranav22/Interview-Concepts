@@ -2,7 +2,7 @@
 // After completing all the queries, print the maximum number of fruits among all the plates.
 Input
 6
-3 2 5 6 1 4
+3 2 5 6 1 4 1010110
 2
 10 2 4
 9 1 5
