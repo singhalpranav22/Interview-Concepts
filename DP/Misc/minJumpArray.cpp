@@ -41,7 +41,7 @@
 //     that requires 2 jumps.
 
 // Greedy solution:
-
+// DP is obvious but would give TLE in O(n^2)
 int Solution::jump(vector<int> &A) {
     int n = A.size();
     if(n==0) return 0;
