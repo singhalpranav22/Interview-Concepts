@@ -12,7 +12,28 @@
 
 //  Note:
 // Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle. 
-
+O(n) space solution : 
+int Solution::minimumTotal(vector<vector<int> > &A) 
+{
+    int dp[A.size()];
+    int n = A.size() - 1;
+    for(int i=0;i<A[n].size();i++)
+        dp[i] = A[n][i];
+    
+    for(int i=A.size()-2;i>=0;i--)
+    {
+        for(int j=0;j<A[i].size();j++)
+        {
+            dp[j] = A[i][j] + min(dp[j],dp[j+1]);
+        }
+    }
+    // int mn = INT_MAX;
+    // for(int i=0;i<A[n].size();i++)
+    //     mn = min(mn,dp[i]);
+        
+    return dp[0];
+}
+// O(n^2) space solution
 int dp[1005][1005];
 int find(vector<vector<int> >&A,int r,int j,int n)
 {
