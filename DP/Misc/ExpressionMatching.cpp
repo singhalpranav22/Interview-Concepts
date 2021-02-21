@@ -40,21 +40,55 @@
 // p contains only lowercase English letters, '.', and '*'.
 // It is guaranteed for each appearance of the character '*', there will be a previous valid character to match.
  // This is recursive coding only, can be converted to dp
- class Solution {
+class Solution {
 public:
-    bool solve(string s, string p,int i,int j,int n,int m){
-        if(j>=m) return i>=n; // Base Case
-        bool fMatch = (i<n && (s[i]==p[j] || p[j]=='.' ));
-        if(j<=m-2 && p[j+1]=='*')
-        {
-            return ((fMatch&&solve(s,p,i+1,j,n,m)) || solve(s,p,i,j+2,n,m));
-        }
-        else{
-            return (fMatch && solve(s,p,i+1,j+1,n,m));
-        }
+    vector<vector<int> > dp;
+    int solve(int i,int j,int n,int m,string &A,string &B)
+{
+     if(i>=n && j>=m) return true;
+        if(j>=m) return false;
+     if(i>=n)
+     {
+         if(B[j]=='*')
+              dp[i][j]=solve(i,j+1,n,m,A,B);
+         else
+             return dp[i][j]=false;
+     }
+        if(dp[i][j]!=-1) return dp[i][j];
+    if((A[i]==B[j]) || B[j]=='?') {
+    
+        return dp[i][j]=solve(i+1,j+1,n,m,A,B);
     }
-    bool isMatch(string s, string p) {
-        int n=s.length(),m=p.length();
-        return solve(s,p,0,0,n,m);
+    
+    if(B[j]=='*')
+    {
+        return dp[i][j]=solve(i+1,j,n,m,A,B) || solve(i,j+1,n,m,A,B);
+    }
+    
+    return dp[i][j]=false;
+}
+    bool isMatch(string A, string B) {
+        int n=A.length();
+        string temp;
+        int i=0;
+        char prev='~';
+        while(i<B.length())
+        {
+            if(B[i]=='*' && prev=='*')
+            {
+                 i++;
+                 continue;
+            }
+            else
+            {
+                prev=B[i];
+                temp+=B[i];
+                i++;
+            }
+        }
+        B=temp;
+        int m=B.length();
+     dp.resize(n+2,vector<int> (m+2,-1));
+    return solve(0,0,n,m,A,B);
     }
 };
