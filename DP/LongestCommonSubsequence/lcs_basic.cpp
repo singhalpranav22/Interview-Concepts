@@ -66,6 +66,14 @@ int lcs(int x, int y, string s1, string s2){
       }
         
     }
+    for(int i=0;i<=x;i++)
+    {
+        for(int j=0;j<=y;j++)
+        {
+            cout<<dp[i][j]<<" ";
+        }
+        cout<<endl;
+    }
     reverse(ans.begin(),ans.end());
     cout<<ans<<"\n";
     return dp[x][y];
