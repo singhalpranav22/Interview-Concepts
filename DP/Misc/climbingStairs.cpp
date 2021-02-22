@@ -28,6 +28,7 @@
 // 3 Explanation 2: 
 
 // [1 1 1], [1 2], [2 1]
+// Use simple DP like Fibonacci Numbers
 
 int dp[101];
 int solve(int i)
