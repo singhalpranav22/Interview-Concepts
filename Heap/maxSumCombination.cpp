@@ -88,6 +88,38 @@ find the largest C out of these. Let the pairs be:
 Note that the numbers (pair of the sums) in every row are sorted in descending order. Now we
 need to merge these sorted LinkedLists.
 */
+// My soultion
+#define mp make_pair
+#define pb push_back
+vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C)
+{
+  priority_queue<pair<int,pair<int,int> > >  heap; // max heap to store the sum along with the indexes from which the sum came from
+  sort(A.rbegin(),A.rend()); // sorting array A in descending order
+  sort(B.rbegin(),B.rend()); // sorting array B in descending order
+  map<pair<int,int>,bool > m; // map to be used as a vis array whether index (i,j)'s sum is already present int the heap or not
+  heap.push(mp(A[0]+A[0],mp(0,0))); // Initially pushing the sum of the biggest elements from both the arrays (Ofcourse it would be the biggest sum combination for our solution)
+  m[mp(0,0)]=true; // this represent that sum from (0,0) is already present in the heap
+  vector<int> ans;
+  while(ans.size()<C) // now find the top elements and keep pushing the (i+1,j) & (i,j+1)th sum cobinations in the heap (remeber that the top of the heap would only contain the maximum sum)
+  {
+      pair<int,pair<int,int> > temp = heap.top();
+      heap.pop();
+      int sum = temp.first;
+      ans.pb(sum);
+      int ind1 = temp.second.first;
+      int ind2 = temp.second.second;
+      if(m[mp(ind1+1,ind2)]!=true){
+          heap.push(mp(A[ind1+1]+A[ind2],mp(ind1+1,ind2)));
+          m[mp(ind1+1,ind2)] = true;
+      }
+      if(m[mp(ind1,ind2+1)]!=true){
+          heap.push(mp(A[ind1]+A[ind2+1],mp(ind1,ind2+1)));
+          m[mp(ind1,ind2+1)] = true;
+      }
+      
+  }
+  return ans;
+}
 vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C)
 {
     sort(A.rbegin(), A.rend());
