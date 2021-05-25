@@ -39,6 +39,9 @@
 // 0 <= gas[i], cost[i] <= 104
 Refer : https://www.youtube.com/watch?v=xmJZSYSvgfE
 
+
+// if sum(cost[i]-gas[i]<0) then no matter where you start you can't complete the circuit.
+
 class Solution {
 public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
