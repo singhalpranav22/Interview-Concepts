@@ -10,6 +10,39 @@
  * };
  */
  
+ // without use of vector : 
+
+ /**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* find(TreeNode *root,TreeNode *p,TreeNode *q){
+        if(root==NULL) return NULL;
+        if(root==p) return p;
+        if(root==q) return q;
+        TreeNode* lf=find(root->left,p,q),*rt=find(root->right,p,q);
+        if(lf!=NULL && rt!=NULL) {
+            return root; 
+        }
+        if(lf==NULL && rt==NULL) return NULL;
+        if(lf==NULL) return rt;
+        if(rt==NULL) return lf;
+        return NULL; // faltu me likha
+    }
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        return find(root,p,q);
+
+    }
+};
+
+// With vector
  bool findPath(TreeNode *root,int k,vector<int> &path) // Find path to a key, and store it in a vector
  {
      if(root==NULL) return false;
