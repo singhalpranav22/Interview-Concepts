@@ -45,7 +45,7 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& v, int k) {
-        int n=v.size();
+        int n=v.size();;;;;
         deque<int> q;
         vector<int> ans;
         for(int i=0;i<n;i++){
